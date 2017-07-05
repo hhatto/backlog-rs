@@ -1,6 +1,6 @@
 # backlog-rs
 
-[Nulab's Backlog](https://developer.nulab-inc.com/docs/backlog/) API for Rust.
+[Nulab's Backlog](https://developer.nulab-inc.com/docs/backlog/) API bindings for Rust.
 this implementation is based on [github-rs](https://github.com/mgattozzi/github-rs),
 written by [Michael Gattozzi](https://github.com/mgattozzi).
 
