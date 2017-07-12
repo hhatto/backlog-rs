@@ -9,6 +9,7 @@ use hyper_tls::HttpsConnector;
 use serde_json;
 
 use projects;
+use space;
 use errors::*;
 use util::url_join;
 
@@ -55,6 +56,7 @@ impl<'g> GetQueryBuilder<'g> {
     func_client!(custom_endpoint, CustomQuery, endpoint_str);
 
     func_client!(projects, projects::get::Projects<'g>);
+    func_client!(space, space::get::Space<'g>);
 }
 
 impl<'g> Executor<'g> {

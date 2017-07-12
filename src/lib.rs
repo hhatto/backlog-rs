@@ -19,6 +19,7 @@ pub mod errors {
 }
 
 pub mod projects;
+pub mod space;
 
 #[cfg(test)]
 mod tests {
