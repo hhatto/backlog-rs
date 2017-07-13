@@ -12,6 +12,7 @@ new_type!(
     RecentlyViewedIssues
     RecentlyViewedProjects
     RecentlyViewedWikis
+    Watchings
 );
 
 from!(
@@ -26,6 +27,7 @@ from!(
         -> Icon = "icon"
         -> Activities = "activities"
         -> Stars = "stars"
+        -> Watchings = "watchings"
     @Myself
         => Executor
         -> RecentlyViewedIssues = "recentlyViewedIssues"
@@ -46,6 +48,9 @@ from!(
         => Executor
     @RecentlyViewedWikis
         => Executor
+    @Watchings
+        => Executor
+        -> Count = "count"
 );
 
 impl_macro!(
@@ -58,6 +63,7 @@ impl_macro!(
         |=> icon -> Icon
         |=> activities -> Activities
         |=> stars -> Stars
+        |=> watchings -> Watchings
         |
         |-> execute
     @Myself
@@ -86,6 +92,10 @@ impl_macro!(
         |
         |-> execute
     @RecentlyViewedWikis
+        |
+        |-> execute
+    @Watchings
+        |=> count -> Count
         |
         |-> execute
 );
