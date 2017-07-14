@@ -21,6 +21,7 @@ pub mod errors {
 pub mod projects;
 pub mod space;
 pub mod users;
+pub mod watchings;
 
 #[cfg(test)]
 mod tests {
