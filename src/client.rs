@@ -8,6 +8,7 @@ use hyper::mime::Mime;
 use hyper_tls::HttpsConnector;
 use serde_json;
 
+use groups;
 use projects;
 use space;
 use users;
@@ -61,6 +62,7 @@ impl<'g> GetQueryBuilder<'g> {
     func_client!(space, space::get::Space<'g>);
     func_client!(users, users::get::Users<'g>);
     func_client!(watchings, watchings::get::Watchings<'g>);
+    func_client!(groups, groups::get::Groups<'g>);
 }
 
 impl<'g> Executor<'g> {
