@@ -13,6 +13,7 @@ use projects;
 use space;
 use users;
 use watchings;
+use notifications;
 use errors::*;
 use util::url_join;
 
@@ -63,6 +64,7 @@ impl<'g> GetQueryBuilder<'g> {
     func_client!(users, users::get::Users<'g>);
     func_client!(watchings, watchings::get::Watchings<'g>);
     func_client!(groups, groups::get::Groups<'g>);
+    func_client!(notifications, notifications::get::Notifications<'g>);
 }
 
 impl<'g> Executor<'g> {

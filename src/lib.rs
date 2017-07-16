@@ -22,6 +22,7 @@ pub mod projects;
 pub mod space;
 pub mod users;
 pub mod groups;
+pub mod notifications;
 pub mod watchings;
 
 #[cfg(test)]
