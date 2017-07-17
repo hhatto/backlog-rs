@@ -1,6 +1,8 @@
 extern crate backlog;
+extern crate hyper;
 
 use backlog::client::Backlog;
+use hyper::StatusCode;
 
 static BACKLOG_GROUP: &'static str = "GROUP";
 static API_KEY: &'static str = "API KEY";
@@ -11,6 +13,13 @@ fn main() {
     match projects {
         Ok((headers, status, json)) => {
             println!("{}, {}", headers, status);
+            match status {
+                StatusCode::Ok => {}
+                _ => {
+                    println!("status={}, res={}", status, json);
+                    return
+                }
+            }
             if let Some(json) = json {
                 println!("{}", json);
             }
