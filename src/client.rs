@@ -15,6 +15,7 @@ use users;
 use watchings;
 use notifications;
 use wikis;
+use priorities;
 use errors::*;
 use util::{url_join, url_add_query};
 
@@ -80,6 +81,7 @@ impl<'g> GetQueryBuilder<'g> {
     func_client!(groups, groups::get::Groups<'g>);
     func_client!(notifications, notifications::get::Notifications<'g>);
     func_client!(wikis, wikis::get::Wikis<'g>);
+    func_client!(priorities, priorities::get::Priorities<'g>);
 }
 
 impl<'g> Executor<'g> {

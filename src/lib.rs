@@ -25,6 +25,7 @@ pub mod groups;
 pub mod notifications;
 pub mod watchings;
 pub mod wikis;
+pub mod priorities;
 
 #[cfg(test)]
 mod tests {
