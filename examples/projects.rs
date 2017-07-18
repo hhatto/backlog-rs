@@ -16,7 +16,7 @@ fn main() {
             match status {
                 StatusCode::Ok => {}
                 _ => {
-                    println!("status={}, res={}", status, json);
+                    println!("status={}, res={}", status, json.unwrap());
                     return;
                 }
             }
