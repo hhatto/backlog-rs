@@ -16,12 +16,9 @@ pub fn url_join(url: &Uri, path: &str) -> Result<Uri, UriError> {
                 curr_path.push('/');
             }
             curr_path.push_str(path);
-            match q {
-                Some(query) => {
-                    curr_path.push('?');
-                    curr_path += query;
-                }
-                None => {}
+            if let Some(query) = q {
+                 curr_path.push('?');
+                 curr_path += query;
             }
             curr_path.parse::<Uri>()
         }
@@ -47,17 +44,17 @@ pub fn url_add_query(url: &Uri, params: Vec<(&str, &str)>) -> Result<Uri, UriErr
                     curr_path.push('?');
                     curr_path += query;
                     for param in params {
-                        let (k, v) = param;
-                        curr_path += format!("&{}={}", k, v).as_str();
+                        let (key, value) = param;
+                        curr_path += format!("&{}={}", key, value).as_str();
                     }
                 }
                 None => {
-                    if params.len() != 0 {
+                    if !params.is_empty() {
                         curr_path.push('?');
-                    }
-                    for param in params {
-                        let (k, v) = param;
-                        curr_path += format!("&{}={}", k, v).as_str();
+                        for param in params {
+                            let (key, value) = param;
+                            curr_path += format!("&{}={}", key, value).as_str();
+                        }
                     }
                 }
             }
