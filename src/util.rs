@@ -17,8 +17,8 @@ pub fn url_join(url: &Uri, path: &str) -> Result<Uri, UriError> {
             }
             curr_path.push_str(path);
             if let Some(query) = q {
-                 curr_path.push('?');
-                 curr_path += query;
+                curr_path.push('?');
+                curr_path += query;
             }
             curr_path.parse::<Uri>()
         }
