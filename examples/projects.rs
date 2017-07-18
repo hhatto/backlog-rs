@@ -17,7 +17,7 @@ fn main() {
                 StatusCode::Ok => {}
                 _ => {
                     println!("status={}, res={}", status, json);
-                    return
+                    return;
                 }
             }
             if let Some(json) = json {
