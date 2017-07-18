@@ -73,7 +73,7 @@ macro_rules! from {
                         let mut req = Request::new($p, h);
                         {
                             let mut headers = req.headers_mut();
-                            headers.set(ContentType::json());
+                            headers.set(ContentType::form_url_encoded());
                             headers.set(UserAgent::new(String::from("backlog-rs")));
                             headers.set(Accept(vec![qitem(m)]));
                         }

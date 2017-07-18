@@ -24,6 +24,7 @@ pub mod users;
 pub mod groups;
 pub mod notifications;
 pub mod watchings;
+pub mod wikis;
 
 #[cfg(test)]
 mod tests {

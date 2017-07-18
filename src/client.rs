@@ -14,8 +14,9 @@ use space;
 use users;
 use watchings;
 use notifications;
+use wikis;
 use errors::*;
-use util::url_join;
+use util::{url_join, url_add_query};
 
 use Json;
 
@@ -54,6 +55,19 @@ impl Backlog {
     pub fn get(&self) -> GetQueryBuilder {
         self.into()
     }
+
+    pub fn get_with_params(&self, body: Vec<(&str, &str)>) -> GetQueryBuilder {
+        let mut gb: GetQueryBuilder = self.into();
+        if let Ok(mut gbr) = gb.request {
+            let new_uri = {
+                let uri = gbr.get_mut().uri();
+                url_add_query(uri, body).expect("build query error")
+            };
+            gbr.get_mut().set_uri(new_uri);
+            gb.request = Ok(gbr);
+        }
+        gb
+    }
 }
 
 impl<'g> GetQueryBuilder<'g> {
@@ -65,6 +79,7 @@ impl<'g> GetQueryBuilder<'g> {
     func_client!(watchings, watchings::get::Watchings<'g>);
     func_client!(groups, groups::get::Groups<'g>);
     func_client!(notifications, notifications::get::Notifications<'g>);
+    func_client!(wikis, wikis::get::Wikis<'g>);
 }
 
 impl<'g> Executor<'g> {

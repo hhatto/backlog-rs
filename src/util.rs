@@ -30,3 +30,41 @@ pub fn url_join(url: &Uri, path: &str) -> Result<Uri, UriError> {
         _ => Uri::from_str("Failed to make a valid Url"),
     }
 }
+
+pub fn url_add_query(url: &Uri, params: Vec<(&str, &str)>) -> Result<Uri, UriError> {
+    // Absolutely hackish but don't know anything better
+    match (url.scheme(), url.authority(), url.path(), url.query()) {
+        (Some(s), Some(a), p, q) => {
+            let mut curr_path = String::from(s);
+            curr_path += "://";
+            curr_path += a;
+            curr_path += p;
+            if !curr_path.ends_with('/') {
+                curr_path.push('/');
+            }
+            match q {
+                Some(query) => {
+                    curr_path.push('?');
+                    curr_path += query;
+                    for param in params {
+                        let (k, v) = param;
+                        curr_path += format!("&{}={}", k, v).as_str();
+                    }
+                }
+                None => {
+                    if params.len() != 0 {
+                        curr_path.push('?');
+                    }
+                    for param in params {
+                        let (k, v) = param;
+                        curr_path += format!("&{}={}", k, v).as_str();
+                    }
+                }
+            }
+            curr_path.parse::<Uri>()
+        }
+        // This should cause the request to fail if something goes
+        // wrong.
+        _ => Uri::from_str("Failed to make a valid Url"),
+    }
+}
