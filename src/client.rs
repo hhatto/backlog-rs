@@ -16,6 +16,7 @@ use watchings;
 use notifications;
 use wikis;
 use priorities;
+use resolutions;
 use errors::*;
 use util::{url_join, url_add_query};
 
@@ -82,6 +83,7 @@ impl<'g> GetQueryBuilder<'g> {
     func_client!(notifications, notifications::get::Notifications<'g>);
     func_client!(wikis, wikis::get::Wikis<'g>);
     func_client!(priorities, priorities::get::Priorities<'g>);
+    func_client!(resolutions, resolutions::get::Resolutions<'g>);
 }
 
 impl<'g> Executor<'g> {
