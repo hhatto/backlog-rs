@@ -36,6 +36,7 @@ pub struct Backlog {
 
 new_type!(GetQueryBuilder);
 new_type!(PatchQueryBuilder);
+new_type!(PutQueryBuilder);
 new_type!(CustomQuery);
 new_type!(Executor);
 
@@ -85,6 +86,10 @@ impl Backlog {
         }
         gb
     }
+
+    pub fn put(&self) -> PutQueryBuilder {
+        self.into()
+    }
 }
 
 impl<'g> GetQueryBuilder<'g> {
@@ -100,6 +105,10 @@ impl<'g> GetQueryBuilder<'g> {
     func_client!(priorities, priorities::get::Priorities<'g>);
     func_client!(resolutions, resolutions::get::Resolutions<'g>);
     func_client!(statuses, statuses::get::Statuses<'g>);
+}
+
+impl<'g> PutQueryBuilder<'g> {
+    func_client!(projects, space::put::Space<'g>);
 }
 
 impl<'g> PatchQueryBuilder<'g> {
@@ -142,12 +151,16 @@ from!(
         => Method::Get
     @PatchQueryBuilder
         => Method::Patch
+    @PutQueryBuilder
+        => Method::Put
 );
 
 from!(
     @GetQueryBuilder
        => CustomQuery
     @PatchQueryBuilder
+       => CustomQuery
+    @PutQueryBuilder
        => CustomQuery
     @CustomQuery
         => Executor
