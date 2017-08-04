@@ -35,6 +35,7 @@ pub struct Backlog {
 }
 
 new_type!(GetQueryBuilder);
+new_type!(PatchQueryBuilder);
 new_type!(CustomQuery);
 new_type!(Executor);
 
@@ -71,6 +72,19 @@ impl Backlog {
         }
         gb
     }
+
+    pub fn patch_with_params(&self, body: Vec<(&str, &str)>) -> PatchQueryBuilder {
+        let mut gb: PatchQueryBuilder = self.into();
+        if let Ok(mut gbr) = gb.request {
+            let new_uri = {
+                let uri = gbr.get_mut().uri();
+                url_add_query(uri, body).expect("build query error")
+            };
+            gbr.get_mut().set_uri(new_uri);
+            gb.request = Ok(gbr);
+        }
+        gb
+    }
 }
 
 impl<'g> GetQueryBuilder<'g> {
@@ -86,6 +100,10 @@ impl<'g> GetQueryBuilder<'g> {
     func_client!(priorities, priorities::get::Priorities<'g>);
     func_client!(resolutions, resolutions::get::Resolutions<'g>);
     func_client!(statuses, statuses::get::Statuses<'g>);
+}
+
+impl<'g> PatchQueryBuilder<'g> {
+    func_client!(watchings, watchings::patch::Watchings<'g>);
 }
 
 impl<'g> Executor<'g> {
@@ -118,10 +136,14 @@ impl<'g> Executor<'g> {
 from!(
     @GetQueryBuilder
         => Method::Get
+    @PatchQueryBuilder
+        => Method::Patch
 );
 
 from!(
     @GetQueryBuilder
+       => CustomQuery
+    @PatchQueryBuilder
        => CustomQuery
     @CustomQuery
         => Executor

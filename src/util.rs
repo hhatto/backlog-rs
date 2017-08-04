@@ -1,6 +1,7 @@
 use hyper::Uri;
 use hyper::error::UriError;
 use std::str::FromStr;
+use url::form_urlencoded;
 
 /// Add an extra subdirectory to the end of the url. This utilizes
 /// Hyper's more generic Uri type. We've set it up to act as a Url.
@@ -43,10 +44,11 @@ pub fn url_add_query(url: &Uri, params: Vec<(&str, &str)>) -> Result<Uri, UriErr
                 Some(query) => {
                     curr_path.push('?');
                     curr_path += query;
-                    for param in params {
-                        let (key, value) = param;
-                        curr_path += format!("&{}={}", key, value).as_str();
+                    let mut s = form_urlencoded::Serializer::new(String::new());
+                    for (key, value) in params {
+                        s.append_pair(key, value);
                     }
+                    curr_path += format!("&{}", s.finish()).as_str();
                 }
                 None => {
                     if !params.is_empty() {

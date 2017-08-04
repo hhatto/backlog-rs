@@ -6,6 +6,7 @@ extern crate tokio_core;
 extern crate serde;
 extern crate serde_json;
 extern crate futures;
+extern crate url;
 
 pub type Json = serde_json::Value;
 
