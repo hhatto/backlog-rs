@@ -106,6 +106,8 @@ impl<'g> PatchQueryBuilder<'g> {
     func_client!(projects, projects::patch::Projects<'g>);
     func_client!(watchings, watchings::patch::Watchings<'g>);
     func_client!(wikis, wikis::patch::Wikis<'g>);
+    func_client!(users, users::patch::Users<'g>);
+    func_client!(groups, groups::patch::Groups<'g>);
 }
 
 impl<'g> Executor<'g> {
