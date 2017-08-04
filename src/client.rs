@@ -103,6 +103,7 @@ impl<'g> GetQueryBuilder<'g> {
 }
 
 impl<'g> PatchQueryBuilder<'g> {
+    func_client!(projects, projects::patch::Projects<'g>);
     func_client!(watchings, watchings::patch::Watchings<'g>);
 }
 
