@@ -38,6 +38,7 @@ pub struct Backlog {
 new_type!(GetQueryBuilder);
 new_type!(PatchQueryBuilder);
 new_type!(PutQueryBuilder);
+new_type!(DeleteQueryBuilder);
 new_type!(CustomQuery);
 new_type!(Executor);
 
@@ -91,6 +92,10 @@ impl Backlog {
     pub fn put(&self) -> PutQueryBuilder {
         self.into()
     }
+
+    pub fn delete(&self) -> DeleteQueryBuilder {
+        self.into()
+    }
 }
 
 impl<'g> GetQueryBuilder<'g> {
@@ -119,6 +124,10 @@ impl<'g> PatchQueryBuilder<'g> {
     func_client!(wikis, wikis::patch::Wikis<'g>);
     func_client!(users, users::patch::Users<'g>);
     func_client!(groups, groups::patch::Groups<'g>);
+}
+
+impl<'g> DeleteQueryBuilder<'g> {
+    func_client!(issues, issues::delete::Issues<'g>);
 }
 
 impl<'g> Executor<'g> {
@@ -155,6 +164,8 @@ from!(
         => Method::Patch
     @PutQueryBuilder
         => Method::Put
+    @DeleteQueryBuilder
+        => Method::Delete
 );
 
 from!(
@@ -163,6 +174,8 @@ from!(
     @PatchQueryBuilder
        => CustomQuery
     @PutQueryBuilder
+       => CustomQuery
+    @DeleteQueryBuilder
        => CustomQuery
     @CustomQuery
         => Executor
