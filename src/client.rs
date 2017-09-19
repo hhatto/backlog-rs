@@ -81,6 +81,19 @@ impl Backlog {
         self.into()
     }
 
+    pub fn post_with_params(&self, body: Vec<(&str, &str)>) -> PostQueryBuilder {
+        let mut gb: PostQueryBuilder = self.into();
+        if let Ok(mut gbr) = gb.request {
+            let new_uri = {
+                let uri = gbr.get_mut().uri();
+                url_add_query(uri, body).expect("build query error")
+            };
+            gbr.get_mut().set_uri(new_uri);
+            gb.request = Ok(gbr);
+        }
+        gb
+    }
+
     pub fn patch_with_params(&self, body: Vec<(&str, &str)>) -> PatchQueryBuilder {
         let mut gb: PatchQueryBuilder = self.into();
         if let Ok(mut gbr) = gb.request {
