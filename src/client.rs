@@ -36,6 +36,7 @@ pub struct Backlog {
 }
 
 new_type!(GetQueryBuilder);
+new_type!(PostQueryBuilder);
 new_type!(PatchQueryBuilder);
 new_type!(PutQueryBuilder);
 new_type!(DeleteQueryBuilder);
@@ -76,6 +77,10 @@ impl Backlog {
         gb
     }
 
+    pub fn post(&self) -> PostQueryBuilder {
+        self.into()
+    }
+
     pub fn patch_with_params(&self, body: Vec<(&str, &str)>) -> PatchQueryBuilder {
         let mut gb: PatchQueryBuilder = self.into();
         if let Ok(mut gbr) = gb.request {
@@ -114,6 +119,10 @@ impl<'g> GetQueryBuilder<'g> {
     func_client!(issues, issues::get::Issues<'g>);
 }
 
+impl<'g> PostQueryBuilder<'g> {
+    func_client!(issues, issues::post::Issues<'g>);
+}
+
 impl<'g> PutQueryBuilder<'g> {
     func_client!(projects, space::put::Space<'g>);
 }
@@ -124,6 +133,7 @@ impl<'g> PatchQueryBuilder<'g> {
     func_client!(wikis, wikis::patch::Wikis<'g>);
     func_client!(users, users::patch::Users<'g>);
     func_client!(groups, groups::patch::Groups<'g>);
+    func_client!(issues, issues::patch::Issues<'g>);
 }
 
 impl<'g> DeleteQueryBuilder<'g> {
@@ -160,6 +170,8 @@ impl<'g> Executor<'g> {
 from!(
     @GetQueryBuilder
         => Method::Get
+    @PostQueryBuilder
+        => Method::Post
     @PatchQueryBuilder
         => Method::Patch
     @PutQueryBuilder
@@ -170,6 +182,8 @@ from!(
 
 from!(
     @GetQueryBuilder
+       => CustomQuery
+    @PostQueryBuilder
        => CustomQuery
     @PatchQueryBuilder
        => CustomQuery
