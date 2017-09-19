@@ -18,6 +18,7 @@ use wikis;
 use priorities;
 use resolutions;
 use statuses;
+use issues;
 use errors::*;
 use util::{url_join, url_add_query};
 
@@ -105,6 +106,7 @@ impl<'g> GetQueryBuilder<'g> {
     func_client!(priorities, priorities::get::Priorities<'g>);
     func_client!(resolutions, resolutions::get::Resolutions<'g>);
     func_client!(statuses, statuses::get::Statuses<'g>);
+    func_client!(issues, issues::get::Issues<'g>);
 }
 
 impl<'g> PutQueryBuilder<'g> {

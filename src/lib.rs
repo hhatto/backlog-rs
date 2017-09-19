@@ -29,6 +29,7 @@ pub mod wikis;
 pub mod priorities;
 pub mod resolutions;
 pub mod statuses;
+pub mod issues;
 
 #[cfg(test)]
 mod tests {
