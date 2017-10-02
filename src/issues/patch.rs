@@ -12,13 +12,11 @@ from!(
     @PatchQueryBuilder
         -> Issues = "issues"
     @Issues
-        => Executor
         => IssueIdOrKey
     @IssueIdOrKey
         => Executor
         -> Comments = "comments"
     @Comments
-        => Executor
         => CommentId
     @CommentId
         => Executor
@@ -28,7 +26,6 @@ impl_macro!(
     @Issues
         |
         |=> issue_id_or_key -> IssueIdOrKey = issue_id_or_key
-        |-> execute
     @IssueIdOrKey
         |=> comments -> Comments
         |
@@ -36,7 +33,6 @@ impl_macro!(
     @Comments
         |
         |=> comment_id -> CommentId = comment_id
-        |-> execute
     @CommentId
         |
         |-> execute
