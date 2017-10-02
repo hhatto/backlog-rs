@@ -134,6 +134,7 @@ impl<'g> GetQueryBuilder<'g> {
 
 impl<'g> PostQueryBuilder<'g> {
     func_client!(projects, projects::post::Projects<'g>);
+    func_client!(space, space::post::Space<'g>);
     func_client!(issues, issues::post::Issues<'g>);
     func_client!(groups, groups::post::Groups<'g>);
     func_client!(notifications, notifications::post::Notifications<'g>);
