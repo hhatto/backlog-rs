@@ -4,8 +4,6 @@
 this implementation is based on [github-rs](https://github.com/mgattozzi/github-rs),
 written by [Michael Gattozzi](https://github.com/mgattozzi).
 
-**This is experimental module. Highly under development.**
-
 
 ## Usage
 
