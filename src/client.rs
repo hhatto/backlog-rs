@@ -135,6 +135,7 @@ impl<'g> GetQueryBuilder<'g> {
 impl<'g> PostQueryBuilder<'g> {
     func_client!(projects, projects::post::Projects<'g>);
     func_client!(space, space::post::Space<'g>);
+    func_client!(users, users::post::Users<'g>);
     func_client!(issues, issues::post::Issues<'g>);
     func_client!(groups, groups::post::Groups<'g>);
     func_client!(notifications, notifications::post::Notifications<'g>);
@@ -155,6 +156,7 @@ impl<'g> PatchQueryBuilder<'g> {
 
 impl<'g> DeleteQueryBuilder<'g> {
     func_client!(projects, projects::delete::Projects<'g>);
+    func_client!(users, users::delete::Users<'g>);
     func_client!(issues, issues::delete::Issues<'g>);
     func_client!(groups, groups::delete::Groups<'g>);
 }
