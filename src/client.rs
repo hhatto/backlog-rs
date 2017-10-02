@@ -11,6 +11,7 @@ use serde_json;
 use groups;
 use projects;
 use space;
+use stars;
 use users;
 use watchings;
 use notifications;
@@ -135,6 +136,7 @@ impl<'g> GetQueryBuilder<'g> {
 impl<'g> PostQueryBuilder<'g> {
     func_client!(projects, projects::post::Projects<'g>);
     func_client!(space, space::post::Space<'g>);
+    func_client!(stars, stars::post::Stars<'g>);
     func_client!(users, users::post::Users<'g>);
     func_client!(watchings, watchings::post::Watchings<'g>);
     func_client!(wikis, wikis::post::Wikis<'g>);

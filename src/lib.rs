@@ -21,6 +21,7 @@ pub mod errors {
 
 pub mod projects;
 pub mod space;
+pub mod stars;
 pub mod users;
 pub mod groups;
 pub mod notifications;
